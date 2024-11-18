@@ -1,0 +1,61 @@
+﻿@using TranVanTai.DuongTuanDuy.Models;
+@using PagedList.Mvc;
+@model PagedList.PagedList<SACH>
+
+
+@{
+    ViewBag.Title = "Trang Chủ";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+@section SachBanNhieu{
+    @Html.Action("SachBanNhieuPartial", "TranVanTai")
+}
+
+@section Slider{
+    @Html.Action("SliderPartial", "TranVanTai")
+}
+<style>
+    .imgbook {
+        width: 100%;
+        max-height: 315px;
+        min-height: 315px; /* Chiều cao tối thiểu */
+        object-fit: cover; /* Cắt ảnh để vừa khít khung chứa */
+    }
+</style>
+<h2 class="text-center">SÁCH MỚI</h2>
+<hr>
+<div class="row text-center">
+    @foreach (var sach in Model)
+    {
+        <div class="col-sm-4 col-md-4 col-lg-4 col-xs-6">
+            <div class="thumbnail">
+
+                <img src="~/Images/@sach.AnhBia" alt="Thumbnail Image 1" class="img-responsive img-rounded imgbook" style="width:400px;">
+                <div class="caption">
+                    <h4 style="min-height:70px;">
+                        <a href="@Url.Action("ChiTietSach", "TranVanTai", new { id = sach.MaSach})">@sach.TenSach</a>
+                    </h4>
+                    <p>
+                        <a href="@Url.Action("ThemGioHang", "GioHang", new { id = sach.MaSach, url = Request.Url.ToString() })" class="btn btn-primary" role="button">
+                            <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Thêm vào giỏ hàng
+                        </a>
+                    </p>
+
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<div>Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount</div>
+
+<div class="MenuTrang">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new {page = page }))
+</div>
+<style>
+    .MenuTrang {
+        display: inline;
+        text-align: center;
+    }
+</style>
+
