@@ -1,0 +1,127 @@
+﻿
+@{
+    ViewBag.Title = "ChiTietSach";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+<style>
+    .text-center {
+        text-align: center;
+        font-size: 2em;
+        color: #3dbdb0; /* Màu của tiêu đề */
+        margin-bottom: 20px;
+    }
+
+    .thumbnail {
+        border: 1px solid #ddd;
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: #f9f9f9;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .tensach {
+        font-size: 1.5em;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 10px;
+    }
+
+    .img-thumbnail {
+        display: block;
+        margin: 0 auto 15px;
+        max-width: 100%;
+        border-radius: 5px;
+    }
+
+    .motasach p {
+        text-align: justify;
+        font-size: 1.1em;
+        line-height: 1.6em;
+        color: #666;
+        margin-bottom: 20px;
+    }
+
+    .ngaycapnhat, .giaban {
+        font-size: 1em;
+        color: #555;
+        margin-bottom: 10px;
+    }
+
+        .giaban span {
+            font-weight: bold;
+            color: #e74c3c; /* Màu đỏ nổi bật cho giá bán */
+        }
+
+    .addtocart {
+        text-align: center;
+    }
+
+    .btn-primary {
+        background-color: #3dbdb0;
+        border-color: #3dbdb0;
+        color: white;
+        padding: 10px 20px;
+        font-size: 1.1em;
+        border-radius: 5px;
+    }
+
+        .btn-primary:hover {
+            background-color: #2a8980;
+            border-color: #2a8980;
+        }
+
+    .glyphicon-shopping-cart {
+        margin-right: 5px;
+    }
+
+</style>
+<h2 class="text-center">Chi Tiết Sách</h2>
+
+<div class="thumbnail">
+    <h4 class="tensach">@Model.TenSach</h4>
+
+    <img src="~/Images/@Model.AnhBia" alt="@Model.TenSach" class="img-fluid img-thumbnail">
+
+    <div class="motasach">
+        <p>
+            @Html.Raw(@Model.MoTa.ToString().Replace("\n", "</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"))
+        </p>
+    </div>
+
+    <p class="ngaycapnhat">
+        Ngày cập nhật: @Html.FormatValue(@Model.NgayCapNhat, "{0:dd/MM/yyyy}")
+    </p>
+
+    <p class="giaban">
+        Giá bán: <span>@Html.FormatValue(@Model.GiaBan, "{0:#,##0}") VND</span>
+    </p>
+    <div class="addtocart">
+        <a href="@Url.Action("ThemGioHang", "GioHang", new { id = Model.MaSach, url = Request.Url.ToString() })" class="btn btn-primary" role="button">
+            <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Add to Cart
+        </a>
+    </div>
+</div>
+<hr />
+@if (Session["TaiKhoan"] == null)
+{
+    <div class="alert alert-warning">
+        Bạn cần <a href="@Url.Action("DangNhap", "User")">đăng nhập</a> để bình luận.
+    </div>
+}
+else
+{
+    <div class="comment-section">
+        <h3>Bình luận</h3>
+        <form id="commentForm">
+            <div class="form-group">
+                <label for="comment">Viết bình luận của bạn:</label>
+                <textarea id="comment" name="comment" class="form-control" rows="5" required></textarea>
+            </div>
+            <button type="button" class="btn btn-primary" onclick="postComment()">Gửi bình luận</button>
+        </form>
+    </div>
+}
+
+

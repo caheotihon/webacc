@@ -1,0 +1,110 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <style type="text/css">
+        .imgbook {
+            transition: all 1s ease-in;
+            width: 400px;
+        }
+
+            .imgbook:hover {
+                transform: scale(0.9);
+                cursor: pointer;
+            }
+
+
+        /* Mô tả sách */
+        /* Ảnh sách bán chạy */
+        .imgsachbannhieu {
+            width: 100px; /* Chiều rộng cố định cho ảnh */
+            height: 150px; /* Chiều cao cố định cho ảnh */
+            object-fit: cover; /* Ảnh được căn đều, không bị méo */
+            border-radius: 5px; /* Bo góc ảnh mềm mại */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Thêm bóng đổ nhẹ cho ảnh */
+            transition: transform 0.3s ease; /* Hiệu ứng phóng to khi hover */
+        }
+
+        /* Mô tả sách */
+        .media-body p {
+            font-size: 0.95em; /* Kích thước font nhỏ hơn */
+            color: #555; /* Màu chữ dịu nhẹ */
+            line-height: 1.6; /* Tăng khoảng cách giữa các dòng */
+            margin-bottom: 10px; /* Khoảng cách giữa các đoạn văn */
+            max-height:110px; /* Giới hạn chiều cao mô tả */
+            padding-right: 10px; /* Đệm bên phải tránh thanh cuộn che văn bản */
+            text-overflow: ellipsis; /* Thêm dấu "..." nếu mô tả quá dài */
+            overflow: hidden; /* Ẩn nội dung tràn */
+        }
+
+        /* Bố cục phần chứa sách */
+        .col-lg-6, .col-md-6 {
+            margin-bottom: 20px; /* Khoảng cách giữa các mục sách */
+        }
+
+        /* Phần chứa media */
+        .media {
+            display: flex;
+            align-items: flex-start; /* Căn chỉnh mục theo chiều dọc */
+            gap: 15px; /* Khoảng cách giữa ảnh và mô tả */
+            padding: 15px; /* Khoảng cách bên trong */
+            background-color: #f9f9f9; /* Màu nền nhạt */
+            border-radius: 8px; /* Bo góc vùng chứa */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* Bóng đổ nhẹ */
+            transition: all 0.3s ease; /* Hiệu ứng khi hover */
+        }
+
+            .media:hover {
+                background-color: #f1f1f1; /* Thay đổi màu nền khi hover */
+                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* Bóng đổ rõ hơn khi hover */
+            }
+
+
+
+    </style>
+</head>
+<body>
+
+    @Html.Action("NavPartial", "TranVanTai")
+
+    @RenderSection("Slider", required: false)
+    
+
+    <!-- /.container-->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
+
+                @Html.Action("ChuDePartial", "TranVanTai")
+                <br>
+                @Html.Action("NhaXuatBanPartial", "TranVanTai")
+
+
+            </div>
+            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+                @RenderBody()
+            </div>
+
+        </div>
+        <hr>
+    </div>
+    <!-- /.container-->
+
+
+
+    @RenderSection("SachBanNhieu", required: false)
+    <!-- /.container-->
+    @Html.Action("FooterPartial", "TranVanTai")
+</body>
+</html>

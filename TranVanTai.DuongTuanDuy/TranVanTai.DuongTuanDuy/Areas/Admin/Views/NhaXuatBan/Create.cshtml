@@ -1,0 +1,46 @@
+﻿@model TranVanTai.DuongTuanDuy.Models.NHAXUATBAN
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create</title>
+</head>
+<body>
+    <form name="NhaXuatBan" action="~/Admin/NhaXuatBan/Luu1" method="post">
+        <h3>Them moi nha xuat ban</h3>
+        <table>
+            <tr>
+                <td>Ten nha xuat ban</td>
+                <td>
+                    <input type="text" name="TenNXB" />
+                </td>
+            </tr>
+            <tr>
+                <td>Dia chi</td>
+                <td>
+                    <input type="text" name="DiaChi" />
+                </td>
+            </tr>
+            <tr>
+                <td>Dien thoai</td>
+                <td>
+                    <input type="text" name="DienThoai" />
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input type="submit" value="Them Moi" />
+                    <input type="reset" value="Lam Moi" />
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
